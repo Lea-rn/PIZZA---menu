@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
+import "./index.css";
+import Challange from "./Challange";
 const pizzaData = [
   ///// dummy data ....
   {
@@ -51,7 +52,7 @@ const pizzaData = [
 function App() {
   ///// parent componenet
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
@@ -60,33 +61,66 @@ function App() {
 }
 
 function Header() {
-  return <h1>Fast React Pizza Co.</h1>;
+  // const mystyle = {
+  //   color: "red",
+  //   fontSize: "48px",
+  //   textTransform: "uppercase",
+  // };
+  const mystyle = {};
+  return (
+    <header className="header">
+      <h1 style={mystyle}>Fast React Pizza Co.</h1>;
+    </header>
+  );
 }
 
 function Menu() {
   return (
-    <div>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-    </div>
+    <main className="menu">
+      <h2>our menu</h2>
+      <Pizza
+        name="pizza spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price={12}
+      />
+
+      <Pizza
+        name="pizza Focaccia"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/Focaccia.jpg"
+        price={22}
+      />
+    </main>
+  );
+}
+
+function Pizza(props) {
+  console.log(props);
+  return (
+    <section>
+      {/* <img src="pizzas/spinaci.jpg" alt="" /> */}
+      <img src={props.photoName} alt="" />
+      <h3>{props.name}</h3>
+      <p>{props.ingredients}</p>
+      <span>{props.price + 3}</span>
+    </section>
   );
 }
 
 function Footer() {
-  return (
-    <footer> {new Date().toLocaleTimeString()}. We're currently open </footer>
-  );
-}
+  const hour = new Date().getHours();
+  console.log(hour);
+  const openHour = 12;
+  const closeHour = 22;
 
-function Pizza() {
+  // if (hour >= openHour && hour <= closeHour) alert("We're currently open ");
+
   return (
-    <section>
-      {/* <img src="pizzas/spinaci.jpg" alt="" /> */}
-      <img src="pizzas/spinaci.jpg" alt="" />
-      <h2>Pizza Spinaci</h2>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </section>
+    <footer className="footer">
+      {" "}
+      {new Date().toLocaleTimeString()}. We're currently open{" "}
+    </footer>
   );
 }
 
@@ -95,5 +129,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />
+    {/* <Challange /> */}
   </React.StrictMode>,
 );
