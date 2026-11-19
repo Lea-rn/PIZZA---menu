@@ -69,15 +69,28 @@ function Header() {
   const mystyle = {};
   return (
     <header className="header">
-      <h1 style={mystyle}>Fast React Pizza Co.</h1>;
+      <h1 style={mystyle}>Fast React Pizza Co.</h1>
     </header>
   );
 }
 
+////// 0 ; undefined ; null , NaN ; false
 function Menu() {
+  const pizzas = pizzaData;
+  // const pizzas = [];
+  const numPizzas = pizzas.length; //// 0
   return (
     <main className="menu">
       <h2>our menu</h2>
+      {numPizzas > 0 && (
+        <ul className="pizzas">
+          {pizzas.map((obj) => (
+            <Pizza pizzaObj={obj} key={obj.name} />
+          ))}
+        </ul>
+      )}
+
+      {/* 
       <Pizza
         name="pizza spinaci"
         ingredients="Tomato, mozarella, spinach, and ricotta cheese"
@@ -90,36 +103,46 @@ function Menu() {
         ingredients="Tomato, mozarella, spinach, and ricotta cheese"
         photoName="pizzas/Focaccia.jpg"
         price={22}
-      />
+      /> */}
     </main>
   );
 }
 
 function Pizza(props) {
-  console.log(props);
+  console.log("pizza props :", props);
   return (
-    <section>
+    <li className="pizza">
       {/* <img src="pizzas/spinaci.jpg" alt="" /> */}
-      <img src={props.photoName} alt="" />
-      <h3>{props.name}</h3>
-      <p>{props.ingredients}</p>
-      <span>{props.price + 3}</span>
-    </section>
+      <img src={props.pizzaObj.photoName} alt="" />
+      <h3>{props.pizzaObj.name}</h3>
+      <p>{props.pizzaObj.ingredients}</p>
+      <span>{props.pizzaObj.price + 3}</span>
+    </li>
   );
 }
 
-function Footer() {
-  const hour = new Date().getHours();
+/////// conditional rendering with && ::
+
+function Footer(props) {
+  const hour = new Date().getHours(); ///20
+  console.log(hour);
   console.log(hour);
   const openHour = 12;
-  const closeHour = 22;
+  const closeHour = 18;
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
 
   // if (hour >= openHour && hour <= closeHour) alert("We're currently open ");
 
   return (
     <footer className="footer">
-      {" "}
-      {new Date().toLocaleTimeString()}. We're currently open{" "}
+      {/* {new Date().toLocaleTimeString()}. We're currently open */}
+      <div className="order">
+        {isOpen && (
+          <p>We're open until {closeHour}:00 Come visit us or order online</p>
+        )}
+        <button className="btn">order</button>
+      </div>
     </footer>
   );
 }

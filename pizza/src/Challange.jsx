@@ -9,7 +9,7 @@ export default function Challange() {
 }
 
 function Avatar() {
-  return <img src="pizzas/foccacia.jpg" alt="ok" />;
+  return <img src="pizzas/focaccia.jpg" alt="ok" />;
 }
 
 function Intro() {
