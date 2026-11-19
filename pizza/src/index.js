@@ -76,18 +76,30 @@ function Header() {
 
 ////// 0 ; undefined ; null , NaN ; false
 function Menu() {
-  const pizzas = pizzaData;
-  // const pizzas = [];
+  // const pizzas = pizzaData;
+  const pizzas = [];
   const numPizzas = pizzas.length; //// 0
   return (
     <main className="menu">
       <h2>our menu</h2>
-      {numPizzas > 0 && (
+      {/* {numPizzas > 0 && (
         <ul className="pizzas">
           {pizzas.map((obj) => (
             <Pizza pizzaObj={obj} key={obj.name} />
           ))}
         </ul>
+      )} */}
+
+      {/* //// conditional rendering with ternary operator ::: */}
+
+      {numPizzas > 0 ? (
+        <ul className="pizzas">
+          {pizzas.map((obj) => (
+            <Pizza pizzaObj={obj} key={obj.name} />
+          ))}
+        </ul>
+      ) : (
+        <p>we're still working on our menu . Please come back later</p>
       )}
 
       {/* 
